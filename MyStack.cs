@@ -19,7 +19,7 @@ public class MyStack
             throw new IndexOutOfRangeException();
         }
         else {
-	        int element = stack[stack.Count - 1];
+	    int element = stack[stack.Count - 1];
             stack.RemoveAt(stack.Count - 1);
             return element;
         }
