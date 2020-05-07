@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace ConsoleApp1
-
 public class MyStack
 {
     private List<int> stack = new List<int>();
@@ -39,6 +37,8 @@ public class MyStack
         }
     }
 }
+
+namespace ConsoleApp1
 
 {
     class Program
