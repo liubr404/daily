@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 public class MyStack
 {
@@ -11,14 +12,16 @@ public class MyStack
         stack.Add(num);
     }
 
-    public void Pop()
+    public int Pop()
     {
         if (stack.Count == 0)
         {
             throw new IndexOutOfRangeException();
         }
         else {
+	        int element = stack[stack.Count - 1];
             stack.RemoveAt(stack.Count - 1);
+            return element;
         }
     }
 
@@ -48,7 +51,7 @@ namespace ConsoleApp1
             myStack.Push(13);
 
             Console.WriteLine("peek: " + myStack.Peek());
-            ///pop
+            //pop
             myStack.Pop();
             Console.WriteLine("new peek: " + myStack.Peek());
         }
