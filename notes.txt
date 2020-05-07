@@ -1,0 +1,8 @@
+git remote add origin + repo_address
+
+git push -u origin master
+
+'''
+if there is initial readme file
+'''
+git pull --rebase origin master
