@@ -47,10 +47,10 @@ namespace ConsoleApp1
             myStack.Push(12);
             myStack.Push(13);
 
-            Console.WriteLine("peek" + myStack.Peek());
+            Console.WriteLine("peek: " + myStack.Peek());
             ///pop
             myStack.Pop();
-            Console.WriteLine("new peek" + myStack.Peek());
+            Console.WriteLine("new peek: " + myStack.Peek());
         }
     }
 }
