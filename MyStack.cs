@@ -37,6 +37,7 @@ namespace ConsoleApp1
                 return stack[stack.Count - 1];
             }
         }
+        
         class Program
         {
             static void Main(string[] args)
