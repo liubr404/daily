@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Collections.Generic;
 
-class CopyDirectorySample
+class Day2
 {
     static void Main()
     {
@@ -25,11 +25,13 @@ class CopyDirectorySample
         public bool Overwrite;
 
     }
+
     public static void CopyFile(object o)
     {
         Data d = (Data)o;
         d.File.CopyTo(d.Path, d.Overwrite);
     }
+
     public static void CopyDirectory(string sourceDirectory, string targetDirectory, bool overwriteExistingFiles)
     {
         // Get subdirectories
@@ -66,7 +68,7 @@ class CopyDirectorySample
             CopyDirectory(subdir.FullName, temppath, overwriteExistingFiles);
         }
 
-        Console.WriteLine(sourceDirectory + " Copy successfully.");
+        Console.WriteLine(sourceDirectory + "Copy successfully.");
     }
 
     public static double GetDirectorySizeInMB(string directoryPath)
@@ -100,6 +102,10 @@ class CopyDirectorySample
 
     public static string[] RandomSample(string filePath, int n)
     {
+        if (!System.IO.File.Exists(filePath))
+        {
+            throw new FileNotFoundException();
+        }
         Random rnd = new Random();
         // generate random number
         List<string> MyCollections = new List<string>();
