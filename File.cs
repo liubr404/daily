@@ -110,12 +110,23 @@ class Day2
         // generate random number
         List<string> MyCollections = new List<string>();
         // save the random lines
+        List<int> randomlist = new List<int>();
+        //save the random index
         string[] lines = System.IO.File.ReadAllLines(filePath);
+        int index = 0;
         for (int i = 0; i < n; i++)
         {
-            int index = rnd.Next(1, lines.Length);
-            MyCollections.Add(lines[index]);
+            index = rnd.Next(1, lines.Length);
+            if (!randomlist.Contains(index))
+            {
+                randomlist.Add(index);
+            }
         }
+        //avoid repeated numbers
+        randomlist.ForEach(number =>
+        {
+            MyCollections.Add(lines[number]);
+        });
         string[] result = MyCollections.ToArray();
         return result;
     }
