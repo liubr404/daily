@@ -2,23 +2,33 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 class Day3
 {
     static void Main()
     {
-        CountInTextFile("/Users/admin/Desktop/daily report/first_day.txt", true, true, true);
+        Console.WriteLine(CountInTextFile("/Users/admin/Desktop/daily report/first_day.txt", true, true, true).LineCount);
         FilterLinesWithNoNumbers("/Users/admin/Desktop/daily report/first_day.txt", "/Users/admin/Desktop/daily report/first_day_temp.txt");
     }
 
-    public static void CountInTextFile(string filePath, bool countLines, bool countWords, bool countChars)
+    public struct FileCount
+    {
+        public string filePath;
+        public int LineCount;
+        public long CharCount;
+        public int WrodCount;
+    }
+
+    public static FileCount CountInTextFile(string filePath, bool countLines, bool countWords, bool countChars)
     {
         if (!System.IO.File.Exists(filePath))
         {
             throw new FileNotFoundException();
         }
         //whether the file exist
-        int lines = 0, words = 0, chars = 0;
+        int lines = 0, words = 0;
+        long chars = 0;
         using (StreamReader r = new StreamReader(filePath))
         {
             string sentence;
@@ -32,19 +42,25 @@ class Day3
                 chars += sentence.Length;
             }
         }
+        FileCount result = new FileCount();
+        result.filePath = filePath;
         // read one line each iteration so that use less memory.
         if (countLines)
         {
+            result.LineCount = lines;
             Console.WriteLine("The number of lines in this file is " + lines);
         }
         if (countWords)
         {
+            result.WrodCount = words;
             Console.WriteLine("The number of words in this file is " + words);
         }
         if (countChars)
         {
+            result.CharCount = chars;
             Console.WriteLine("The number of chars in this file is " + chars);
         }
+        return result;
     }
 
     public static void FilterLinesWithNoNumbers(string filePath, string destinationFilePath)
