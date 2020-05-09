@@ -11,3 +11,11 @@ git pull
 '''
 merge remote repo with native repo
 '''
+git branch + name
+//create git branch
+
+git checkout + branch_name
+//go into the branch
+
+git push --set-upstream origin + branc_name
+//push the branch to remote repo
