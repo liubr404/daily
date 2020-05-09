@@ -19,3 +19,8 @@ git checkout + branch_name
 
 git push --set-upstream origin + branc_name
 //push the branch to remote repo
+
+Thread thr = new Thread(() => File.Copy(file.FullName, temp, overwriteExistingFiles));
+//using lambda expression to implement multi-thread
+
+//readlines function uses more memory than readline function
