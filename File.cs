@@ -1,133 +1,88 @@
 ﻿using System;
 using System.IO;
-using System.Threading;
-using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Linq;
+using System.Runtime.CompilerServices;
 
-class Day2
+class Day3
 {
     static void Main()
     {
-        // Copy sample
-        CopyDirectory("/Users/admin/Desktop/daily report", "/Users/admin/Desktop/temp", true);
-        // directory sizes
-        Console.WriteLine(GetDirectorySizeInMB("/Users/admin/source"));
-        string[] lines = RandomSample("/Users/admin/Desktop/daily report/first_day.txt", 3);
-        foreach (string line in lines)
-        {
-            Console.WriteLine(line);
-        }
+        Console.WriteLine(CountInTextFile("/Users/admin/Desktop/daily report/first_day.txt", true, true, true).LineCount);
+        FilterLinesWithNoNumbers("/Users/admin/Desktop/daily report/first_day.txt", "/Users/admin/Desktop/daily report/first_day_temp.txt");
     }
 
-    public struct Data
+    public struct FileCount
     {
-        public FileInfo File;
-        public string Path;
-        public bool Overwrite;
-
+        public string filePath;
+        public int LineCount;
+        public long CharCount;
+        public int WrodCount;
     }
 
-    public static void CopyFile(object o)
-    {
-        Data d = (Data)o;
-        d.File.CopyTo(d.Path, d.Overwrite);
-    }
-
-    public static void CopyDirectory(string sourceDirectory, string targetDirectory, bool overwriteExistingFiles)
-    {
-        // Get subdirectories
-        DirectoryInfo dir = new DirectoryInfo(sourceDirectory);
-        DirectoryInfo[] dirs = dir.GetDirectories();
-
-        if (!dir.Exists)
-        {
-            throw new DirectoryNotFoundException();
-        }
-
-        // create target directory
-        if (!Directory.Exists(targetDirectory))
-        {
-            Directory.CreateDirectory(targetDirectory);
-        }
-
-        // Get the files in the directory and copy
-        FileInfo[] files = dir.GetFiles();
-        foreach (FileInfo file in files)
-        {
-            string temp = Path.Combine(targetDirectory, file.Name);
-            var data = new Data { File = file, Path = temp, Overwrite = overwriteExistingFiles };
-            Thread thr = new Thread(CopyFile);
-            //The input type for thread is only object.
-            //Need to use structure save the parameters.
-            thr.Start(data);
-        }
-
-        // copy subdirectories
-        foreach (DirectoryInfo subdir in dirs)
-        {
-            string temppath = Path.Combine(targetDirectory, subdir.Name);
-            CopyDirectory(subdir.FullName, temppath, overwriteExistingFiles);
-        }
-
-        Console.WriteLine(sourceDirectory + "Copy successfully.");
-    }
-
-    public static double GetDirectorySizeInMB(string directoryPath)
-    {
-        DirectoryInfo dir = new DirectoryInfo(directoryPath);
-        DirectoryInfo[] dirs = dir.GetDirectories();
-
-        long size = 0; // save size
-        double result = 0.00; // save to MB
-
-        if (!dir.Exists)
-        {
-            throw new DirectoryNotFoundException();
-        }
-
-        FileInfo[] files = dir.GetFiles();
-        foreach (FileInfo file in files)
-        {
-            size += file.Length;
-        }
-        result = (size / 1024f) / 1024f;
-        //subdirectory sizes
-        foreach (DirectoryInfo subdir in dirs)
-        {
-            result += GetDirectorySizeInMB(subdir.FullName);
-        }
-        result = Math.Round(result, 2);
-        //Console.WriteLine(result);
-        return result;
-    }
-
-    public static string[] RandomSample(string filePath, int n)
+    public static FileCount CountInTextFile(string filePath, bool countLines, bool countWords, bool countChars)
     {
         if (!System.IO.File.Exists(filePath))
         {
             throw new FileNotFoundException();
         }
-        Random rnd = new Random();
-        // generate random number
-        List<string> MyCollections = new List<string>();
-        // save the random lines
-        List<int> randomlist = new List<int>();
-        //save the random index
-        string[] lines = System.IO.File.ReadAllLines(filePath);
-        int index = 0;
-        for (int i = 0; i < n; i++)
+        //whether the file exist
+        int lines = 0, words = 0;
+        long chars = 0;
+        using (StreamReader r = new StreamReader(filePath))
         {
-            index = rnd.Next(1, lines.Length);
-            if (!randomlist.Contains(index))
+            string sentence;
+            // save each line
+            while ((sentence = r.ReadLine()) != null)
             {
-                randomlist.Add(index);
+                //Console.WriteLine(sentence);
+                lines++;
+                string[] word = sentence.Split(' ');
+                words += word.Length;
+                chars += sentence.Length;
             }
         }
-        //avoid repeated numbers
-        randomlist.ForEach(number =>
+        FileCount result = new FileCount();
+        result.filePath = filePath;
+        // read one line each iteration so that use less memory.
+        if (countLines)
         {
-            MyCollections.Add(lines[number]);
-        });
-        string[] result = MyCollections.ToArray();
+            result.LineCount = lines;
+            Console.WriteLine("The number of lines in this file is " + lines);
+        }
+        if (countWords)
+        {
+            result.WrodCount = words;
+            Console.WriteLine("The number of words in this file is " + words);
+        }
+        if (countChars)
+        {
+            result.CharCount = chars;
+            Console.WriteLine("The number of chars in this file is " + chars);
+        }
         return result;
+    }
+
+    public static void FilterLinesWithNoNumbers(string filePath, string destinationFilePath)
+    {
+        if (!System.IO.File.Exists(filePath))
+        {
+            throw new FileNotFoundException();
+        }
+        using (StreamReader reader = new StreamReader(filePath))
+        {
+            using (StreamWriter writer = new StreamWriter(destinationFilePath))
+            {
+                string sentence;
+                Regex regex = new Regex(@".*\d+.*", RegexOptions.RightToLeft);
+                while ((sentence = reader.ReadLine()) != null)
+                {
+                    if (regex.Match(sentence).Success)
+                        continue;
+                    // if the line contains number,go to next iteration.
+                    writer.WriteLine(sentence);
+                }
+            }
+        }
     }
 }
