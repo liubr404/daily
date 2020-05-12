@@ -11,11 +11,12 @@ namespace DirectoryStatistics
     {
         public static long length;
         public static double size;
+        //save the length and size of the directory
         public static void Main(string[] args)
         {
             /*
             #if DEBUG
-                        args = new[] { "-d /Users/admin/Desktop/daily report/first_day.txt -p *.txt" };
+                        args = new[] { "-d /Users/admin/Desktop/dailyreport -p *.txt" };
             #endif
             */
             string filePath;
@@ -59,6 +60,7 @@ namespace DirectoryStatistics
                         */
                         //this method using regex to get all txt name from the path
                         fileNames.Add(file.Replace(filePath, ".."));
+                        //save the file names in proper format
                     }
                     size = (length / 1024f) / 1024f;
                     watch.Stop();
