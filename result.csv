@@ -1,71 +1,71 @@
-Afrikaans,True,True,False,True,False
-Arabic,True,True,True,True,True
-Arabic, Levantine ,True,False,False,False,True
-Bangla,True,True,True,True,False
-Bosnian (Latin),True,True,False,True,False
-Bulgarian,True,True,False,True,False
-Cantonese (Traditional),False,False,False,False,False
-Catalan,True,True,False,True,False
-Chinese Simplified ,True,True,True,True,True
-Chinese Traditional ,True,True,True,False,True
-Croatian,True,True,False,True,False
-Czech,True,True,False,True,False
-Danish,True,True,False,True,False
-Dutch,True,True,False,True,False
-English ,True,True,False,True,True
-Estonian,True,True,False,False,False
-Fijian,True,True,False,False,False
-Filipino,True,True,False,False,False
-Finnish,True,True,False,True,False
-French,True,True,False,True,True
-German ,True,True,False,True,True
-Greek,True,True,False,True,False
-Gujarati,True,True,True,False,False
-Haitian Creole,False,False,False,True,False
-Hebrew,True,True,True,True,False
-Hindi,True,True,True,True,True
-Hmong Daw,False,False,False,True,False
-Hungarian,True,True,False,True,False
-Icelandic,True,True,False,True,False
-Indonesian,True,True,False,True,False
-Irish,True,True,False,False,False
-Italian,True,True,False,True,True
-Japanese,True,True,True,True,True
-Kannada,True,False,True,False,False
-Korean,True,True,False,True,False
-Latvian,True,True,False,True,False
-Lithuanian,True,True,False,True,False
-Malagasy,True,True,False,False,False
-Malay,True,True,True,True,False
-Malayalam,True,False,True,False,False
-Maltese,False,True,False,True,False
-Maori,True,True,False,False,False
-Marathi,True,True,True,False,False
-Norwegian,True,True,False,True,False
-Persian,True,True,False,True,False
-Polish,True,True,False,True,False
-Portuguese (Brazil),True,True,False,True,True
-Portuguese (Portugal),True,False,False,True,True
-Punjabi,True,False,True,False,False
-Queretaro Otomi,False,False,False,False,False
-Romanian,True,True,False,True,False
-Russian,True,True,False,True,True
-Samoan,True,True,False,False,False
-Serbian (Cyrillic),False,False,True,False,False
-Serbian (Latin),True,True,True,True,False
-Slovak,True,True,False,True,False
-Slovenian,True,True,False,True,False
-Spanish ,True,True,False,True,True
-Swahili,True,True,False,True,False
-Swedish,True,True,False,True,False
-Tahitian,True,True,False,False,False
-Tamil,True,False,True,True,False
-Telugu,True,False,True,False,False
-Thai,True,True,True,True,False
-Tongan,True,True,False,False,False
-Turkish,True,True,False,True,False
-Ukrainian,True,True,False,True,False
-Urdu,True,True,False,True,False
-Vietnamese,True,True,False,True,False
-Welsh,True,True,False,True,False
-Yucatec Maya,False,False,False,False,False
+Afrikaans|True|True|False|True|False
+Arabic|True|True|True|True|True
+Arabic, Levantine |True|False|False|False|True
+Bangla|True|True|True|True|False
+Bosnian (Latin)|True|True|False|True|False
+Bulgarian|True|True|False|True|False
+Cantonese (Traditional)|False|False|False|False|False
+Catalan|True|True|False|True|False
+Chinese Simplified |True|True|True|True|True
+Chinese Traditional |True|True|True|False|True
+Croatian|True|True|False|True|False
+Czech|True|True|False|True|False
+Danish|True|True|False|True|False
+Dutch|True|True|False|True|False
+English |True|True|False|True|True
+Estonian|True|True|False|False|False
+Fijian|True|True|False|False|False
+Filipino|True|True|False|False|False
+Finnish|True|True|False|True|False
+French|True|True|False|True|True
+German |True|True|False|True|True
+Greek|True|True|False|True|False
+Gujarati|True|True|True|False|False
+Haitian Creole|False|False|False|True|False
+Hebrew|True|True|True|True|False
+Hindi|True|True|True|True|True
+Hmong Daw|False|False|False|True|False
+Hungarian|True|True|False|True|False
+Icelandic|True|True|False|True|False
+Indonesian|True|True|False|True|False
+Irish|True|True|False|False|False
+Italian|True|True|False|True|True
+Japanese|True|True|True|True|True
+Kannada|True|False|True|False|False
+Korean|True|True|False|True|False
+Latvian|True|True|False|True|False
+Lithuanian|True|True|False|True|False
+Malagasy|True|True|False|False|False
+Malay|True|True|True|True|False
+Malayalam|True|False|True|False|False
+Maltese|False|True|False|True|False
+Maori|True|True|False|False|False
+Marathi|True|True|True|False|False
+Norwegian|True|True|False|True|False
+Persian|True|True|False|True|False
+Polish|True|True|False|True|False
+Portuguese (Brazil)|True|True|False|True|True
+Portuguese (Portugal)|True|False|False|True|True
+Punjabi|True|False|True|False|False
+Queretaro Otomi|False|False|False|False|False
+Romanian|True|True|False|True|False
+Russian|True|True|False|True|True
+Samoan|True|True|False|False|False
+Serbian (Cyrillic)|False|False|True|False|False
+Serbian (Latin)|True|True|True|True|False
+Slovak|True|True|False|True|False
+Slovenian|True|True|False|True|False
+Spanish |True|True|False|True|True
+Swahili|True|True|False|True|False
+Swedish|True|True|False|True|False
+Tahitian|True|True|False|False|False
+Tamil|True|False|True|True|False
+Telugu|True|False|True|False|False
+Thai|True|True|True|True|False
+Tongan|True|True|False|False|False
+Turkish|True|True|False|True|False
+Ukrainian|True|True|False|True|False
+Urdu|True|True|False|True|False
+Vietnamese|True|True|False|True|False
+Welsh|True|True|False|True|False
+Yucatec Maya|False|False|False|False|False

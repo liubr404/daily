@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Linq;
+using System.Data;
 
 class day4
 {
@@ -21,7 +22,8 @@ class day4
         string html = Encoding.UTF8.GetString(data);
         //Console.WriteLine(html);
         //debug
-        List<row> textList = GetContent(html);
+        IEnumerable<row> textList = GetContent(html);
+        //less space than list
         /*foreach (row line in textList) { 
             Console.WriteLine(line.NeuralTranslation);
         }*/
@@ -30,7 +32,8 @@ class day4
         {
             foreach (row each in textList)
             {
-                var line = string.Format("{0},{1},{2},{3},{4},{5}", each.TranslatorLanguage, each.NeuralTranslation, each.Customization, each.Transliteration, each.Dictionary, each.SpeechTranslation);
+                var line = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", each.TranslatorLanguages, each.NeuralTranslation, each.Customization, each.Transliteration, each.Dictionary, each.SpeechTranslation);
+                //some language names contain comma
                 writer.WriteLine(line);
                 writer.Flush();
             }
@@ -39,14 +42,14 @@ class day4
 
     public struct row
     {
-        public string TranslatorLanguage;
+        public string TranslatorLanguages;
         public bool NeuralTranslation;
         public bool Customization;
         public bool Transliteration;
         public bool Dictionary;
         public bool SpeechTranslation;
     }
-    public static List<row> GetContent(string str)
+    public static IEnumerable<row> GetContent(string str)
     {
 
         string tmpStr = string.Format("<tbody[^>]*?>(?<Text>[^*]*)</tbody>");
@@ -60,28 +63,44 @@ class day4
         {
             result = match.Groups["Text"].Value;
         }
-        //Console.WriteLine(result);
-        MatchCollection trCollection = Regex.Matches(result, trStr, RegexOptions.IgnoreCase);
-        foreach (Match match in trCollection)
+        if (string.IsNullOrEmpty(result))
         {
-            string temp = match.Groups["Text"].Value;
-            string row_ = Regex.Replace(temp, @"<td><\/td>", "No.");
-            //replace space to No
-            row_ = Regex.Replace(row_, @"<sup>([^*]*?)<\/sup>", "");
-            //delete sup label
-            row_ = Regex.Replace(row_, @"<[^*]*?>", ".");
-            //delete all labels
-            string[] each_row = Regex.Split(row_, @"\.+");
-            each_row = each_row.Where(x => !string.IsNullOrEmpty(x)).ToArray();
-            //Console.WriteLine(each_row[0]);
-            row row_line = new row();
-            row_line.TranslatorLanguage = each_row[0];
-            row_line.NeuralTranslation = Judge(each_row[1]);
-            row_line.Customization = Judge(each_row[2]);
-            row_line.Transliteration = Judge(each_row[3]);
-            row_line.Dictionary = Judge(each_row[4]);
-            row_line.SpeechTranslation = Judge(each_row[5]);
-            text.Add(row_line);
+            throw new FileNotFoundException("no result for your search");
+            //make sure the result exists
+        }
+        else
+        {
+            //Console.WriteLine(result);
+            MatchCollection trCollection = Regex.Matches(result, trStr, RegexOptions.IgnoreCase);
+            foreach (Match match in trCollection)
+            {
+                string temp = match.Groups["Text"].Value;
+                string row_ = Regex.Replace(temp, @"<td><\/td>", "No.");
+                //replace space to No
+                row_ = Regex.Replace(row_, @"<sup>([^*]*?)<\/sup>", "");
+                //delete sup label
+                row_ = Regex.Replace(row_, @"<[^*]*?>", ".");
+                //delete all labels
+                string[] each_row = Regex.Split(row_, @"\.+");
+                each_row = each_row.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+                //Console.WriteLine(each_row[0]);
+                row row_line = new row();
+                if (each_row.Length == 6)
+                //make sure there is no out of index error
+                {
+                    row_line.TranslatorLanguages = each_row[0];
+                    row_line.NeuralTranslation = Judge(each_row[1]);
+                    row_line.Customization = Judge(each_row[2]);
+                    row_line.Transliteration = Judge(each_row[3]);
+                    row_line.Dictionary = Judge(each_row[4]);
+                    row_line.SpeechTranslation = Judge(each_row[5]);
+                    text.Add(row_line);
+                }
+                else
+                {
+                    continue;
+                }
+            }
         }
         return text;
     }
