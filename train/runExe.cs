@@ -15,6 +15,7 @@ namespace RunExe
                     Arguments = "-d /Users/admin/Desktop/dailyreport -p *.txt",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
+                    RedirectStandardError = true,
                     CreateNoWindow = true
                 }
             };

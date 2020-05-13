@@ -23,11 +23,11 @@ namespace DirectoryStatistics
             string pattern;
             Stopwatch watch = new Stopwatch();
             watch.Start();
-            if (args.Length > 0 && args[0] == "-d" && args[2] == "-p")
+            if (args.Length == 4 && args[0] == "-d" && args[2] == "-p")
             {
                 filePath = args[1];
                 pattern = args[3];
-                Console.WriteLine("File name pattern: {0}", pattern);
+                int fileCount;
                 /*for (int i = 0; i < args.Length; i++) {
                     Console.WriteLine(args[i]);
                 }*/
@@ -35,13 +35,14 @@ namespace DirectoryStatistics
                 string[] files = Directory.GetFiles(filePath, pattern, SearchOption.AllDirectories);
                 if (files.Length == 0)
                 {
-                    throw new Exception("No suitable file");
+                    Console.WriteLine("No file is suitable for your search");
                 }
                 else
                 {
                     List<string> fileNames = new List<string>();
-                    int fileCount = files.Length;
+                    fileCount = files.Length;
                     //find all pattern files in the folder
+                    Console.WriteLine("File name pattern: {0}", pattern);
                     foreach (string file in files)
                     {
                         FileInfo info = new FileInfo(file);
@@ -73,7 +74,7 @@ namespace DirectoryStatistics
             }
             else
             {
-                throw new Exception("pls input in correct format");
+                Console.WriteLine("pls input in correct format");
             }
             //Console.WriteLine(filePath, pattern);
         }
