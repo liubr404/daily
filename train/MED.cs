@@ -38,7 +38,8 @@ namespace MinimumEditDistance
                             table[i, j] = table[i - 1, j - 1];
                         }
                         //if the char in i-1 is the same as char in j-1, there is no operation needed
-                        else
+			//string[i-1] is the ith char in table
+			else
                         {
                             table[i, j] = Math.Min(
                                 Math.Min(
