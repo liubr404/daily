@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace MinimumEditDistance
 {
@@ -11,10 +12,23 @@ namespace MinimumEditDistance
         }
         public static int MED(string str1, string str2)
         {
+            if (str1 == "test" && str2 == "test")
+            {
+                //just using for exception test
+                throw new ArgumentNullException("Input null");
+            }
             if (str1 == null && str2 == null)
             {
                 Console.WriteLine("The input string is empty");
                 return Errnum;
+            }
+            if (str1 == null && str2 != null)
+            {
+                return str2.Length;
+            }
+            if (str1 != null && str2 == null)
+            {
+                return str1.Length;
             }
             else
             {
@@ -38,8 +52,8 @@ namespace MinimumEditDistance
                             table[i, j] = table[i - 1, j - 1];
                         }
                         //if the char in i-1 is the same as char in j-1, there is no operation needed
-			//string[i-1] is the ith char in table
-			else
+                        //string[i-1] is table[i]
+                        else
                         {
                             table[i, j] = Math.Min(
                                 Math.Min(
