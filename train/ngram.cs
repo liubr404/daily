@@ -41,7 +41,8 @@ public class Ngram
             }
         }
     }
-    public IEnumerable<string> ngram_queue()
+
+    public IEnumerable<string> ngram_queue(int N)
     {
         if (OriginalSentence == null)
         {
@@ -90,6 +91,43 @@ public class Ngram
         }
     }
 
+    public Dictionary<string, int> NgramToDict(int n)
+    {
+
+        Dictionary<string, int> ngram = new Dictionary<string, int>();
+        if (n == 1)
+        {
+            var SentencePiece = OriginalSentence.Split(" ");
+            for (int i = 0; i < SentencePiece.Length; i++)
+            {
+                if (!ngram.ContainsKey(SentencePiece[i]))
+                {
+                    ngram[SentencePiece[i]] = 1;
+                }
+                else
+                {
+                    ngram[SentencePiece[i]] += 1;
+                }
+            }
+            return ngram;
+        }
+        else
+        {
+            IEnumerable<string> result = ngram_queue(n);
+            foreach (string temp in result)
+            {
+                if (!ngram.ContainsKey(temp))
+                {
+                    ngram[temp] = 1;
+                }
+                else
+                {
+                    ngram[temp] += 1;
+                }
+            }
+            return ngram;
+        }
+    }
     public void readNgram()
     {
         Console.WriteLine("1-gram");
@@ -104,7 +142,7 @@ public class Ngram
             for (int i = 2; i <= N; i++)
             {
                 Console.WriteLine("{0}-gram", i);
-                IEnumerable<string> result = ngram_queue();
+                IEnumerable<string> result = ngram_queue(i);
                 foreach (string temp in result)
                 {
                     Console.WriteLine(temp);
