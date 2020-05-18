@@ -12,8 +12,15 @@ public class BLEU
         private string OriginalSentence;
         public Ngram(string sentence, int n)
         {
-            N = n;
-            OriginalSentence = sentence;
+            if (sentence != null && n > 1)
+            {
+                N = n;
+                OriginalSentence = sentence;
+            }
+            else
+            {
+                Console.WriteLine("Please input something and the n should be bigger than 1");
+            }
         }
 
         public IEnumerable<string> ngram_queue(int N)
@@ -139,16 +146,13 @@ public class BLEU
             Dictionary<string, int> Dict2 = Dict_list2[m];
             foreach (string key in Dict1.Keys)
             {
+                count += Dict1[key];
                 //Console.WriteLine(key);
                 if (Dict2.ContainsKey(key))
                 {
                     count_clip += Math.Min(Dict1[key], Dict2[key]);
                     //modified precision
                 }
-            }
-            foreach (int i in Dict1.Values)
-            {
-                count += i;
             }
             foreach (int j in Dict2.Values)
             {
