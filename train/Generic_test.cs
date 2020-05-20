@@ -20,6 +20,7 @@ namespace generic
     }
     class Program
     {
+        //main func for test
         static void Main(string[] args)
         {
             Generic_test<int> test1 = new Generic_test<int>(3);
